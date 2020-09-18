@@ -1,0 +1,78 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="cart_area section_padding">
+    <div class="container">
+      <div class="cart_inner">
+        <div class="table-responsive">
+            {% if order %}
+                <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for o in order.order_row.all %}
+                    <tr>
+                        <td>
+                        <div class="media">
+                            <div class="d-flex">
+                            <img src="{{o.product.image.url}}" alt="" />
+                            </div>
+                            <div class="media-body">
+                            <p>{{o.product.title}}</p>
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <h5>{{o.product.price}}</h5>
+                        </td>
+                        <td>
+                        <div class="product_count">
+                            <input class="input-number" type="text" value="{{o.amount}}" readonly>
+                        </div>
+                        </td>
+                        <td>
+                        <h5>{{o.price}}</h5>
+                        </td>
+                        <td>
+                            <form method="post" action="{% url 'order:delete' %}">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{o.product.id}}" name="product_id" />
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                            </form>
+                        </td>
+
+                        {% comment %} <td>
+                        <a class="btn btn-sm" href="#">Update Product</a>
+                        </td> {% endcomment %}
+    
+                    </tr>
+                {% endfor %}
+                
+                {% comment %} <tr class="bottom_button">
+                    
+                    <td></td>
+                    <td></td>
+                    <td>
+                    </td>
+                </tr> {% endcomment %}
+                </tbody>
+            </table>
+            <div class="checkout_btn_inner float-right">
+                <a class="btn_1 mb-3" href="{% url 'products:list' %}">Continue Shopping</a>
+                <a class="btn_1 checkout_btn_1" href="{% url 'order:checkout' %}">Proceed to checkout</a>
+            </div>
+            {% else %}
+                <h1>Cart is Empty</h1>
+            {% endif %}
+          
+        </div>
+      </div>
+  </section>
+{% endblock content %}

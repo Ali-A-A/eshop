@@ -1,0 +1,7 @@
+<div class="card m-3" style="width: 15rem;">
+    <a href="{% url 'products:detail' id=object.id %}"><img class="card-img-top" src="{{object.image.url}}" height="250" alt={{object.title}}>
+    <div class="card-body">
+        <h5 class="card-title">{{object.title}}</h5>
+        <p class="card-text">From ${{object.price}}</p>
+    </div></a>
+</div>

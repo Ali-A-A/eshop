@@ -1,0 +1,35 @@
+{% load static %}
+{% load render_partial %}
+
+<!doctype html>
+
+<html class="no-js" lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>eShop</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="manifest" href="site.webmanifest">
+		{% include 'shared/_HeaderRefs.html' %}
+        {% block header_ref %}{% endblock header_ref %}
+
+    </head>
+
+    <body onload="delete_message()">
+    
+        {% render_partial 'header' %}
+
+        {% block content %}{% endblock content %}
+        
+        {% render_partial 'footer' %}
+            
+        {% include 'shared/_FooterRefs.html' %}
+
+        {% block footer_ref %}{% endblock footer_ref %}
+
+    </body>
+
+</html>

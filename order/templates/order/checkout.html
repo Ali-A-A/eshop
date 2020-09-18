@@ -1,0 +1,129 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+
+{% block content %} 
+
+    <div class="slider-area ">
+    <!-- Mobile Menu -->
+    <div class="single-slider slider-height2 d-flex align-items-center" data-background="{% static 'img/hero/category.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>Checkout</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+    {% if order %}
+         <section class="checkout_area section_padding">
+            <div class="container">
+            <div class="billing_details">
+                <div class="row">
+                <div class="col-lg-8">
+                    <h3>Billing Details</h3>
+                    <form class="row contact_form" action="" method="post" novalidate="novalidate">
+                    {% csrf_token %}
+                    <div class="col-md-6 form-group p_star">
+                        {% for error in form.first_name.errors %}
+                            <span style="color : red">{{error}}</span>
+                        {% endfor %}
+                        {{ form.first_name }}
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                        {% for error in form.last_name.errors %}
+                            <span style="color : red">{{error}}</span>
+                        {% endfor %}
+                        {{ form.last_name }}
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                        {% for error in form.phone.errors %}
+                            <span style="color : red">{{error}}</span>
+                        {% endfor %}
+                        {{ form.phone }}                      
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                        {% for error in form.email.errors %}
+                            <span style="color : red">{{error}}</span>
+                        {% endfor %}
+                        {{ form.email }}
+                        
+                    </div>
+                    
+                    <div class="col-md-12 form-group p_star">
+                        {% for error in form.address.errors %}
+                            <span style="color : red">{{error}}</span>
+                        {% endfor %}
+                        {{ form.address }}
+                        
+                    </div>
+                
+                    <div class="col-md-12 form-group">
+                    
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <div class="creat_account">
+                        <h3>Shipping Details</h3>
+                        </div>
+                        {% for error in form.notes.errors %}
+                            <span style="color : red">{{error}}</span>
+                        {% endfor %}
+                        {{ form.notes }}
+                    </div>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="order_box">
+                    <h2>Your Order</h2>
+                    <ul class="list">
+                        <li>
+                        <a href="#">Product
+                            <span>Total</span>
+                        </a>
+                        </li>
+                        {% for o in order.order_row.all %}
+                            <li>
+                            <a href="{% url 'products:detail' id=o.product.id %}">{{o.product.title}}
+                                <span class="middle">x {{o.amount}}</span>
+                                <span class="last">${{o.price}}</span>
+                            </a>
+                            </li>
+                        {% endfor %}
+                       
+                        
+                    </ul>
+                    <ul class="list list_2">
+                        <li>
+                        <a>Total
+                            <span>${{total}}</span>
+                        </a>
+                        </li>
+                    </ul>
+                    <div class="creat_account">
+                        {% for error in form.is_accept_terms.errors %}
+                            <span style="color : red">{{error}}</span>
+                        {% endfor %}
+                        {{ form.is_accept_terms }}
+                        <label for="f-option4">I’ve read and accept the </label>
+                        <a href="#">terms & conditions*</a>
+                    </div>
+                    <button class="btn btn-info" type="submit">Submit your cart</button>
+                    </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+    {% else %}
+        <h1 class='text-center m-3'>You don't have active order.</h1>
+
+    {% endif %}
+
+
+   
+{% endblock content %}

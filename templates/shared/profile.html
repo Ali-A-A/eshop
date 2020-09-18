@@ -1,0 +1,89 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="slider-area ">
+      <!-- Mobile Menu -->
+      <div class="single-slider slider-height2 d-flex align-items-center" data-background="{% static "img/hero/category.jpg" %}">
+          <div class="container">
+              <div class="row">
+                  <div class="col-xl-12">
+                      <div class="hero-cap text-center">
+                          <h2>Profile</h2>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+    <div>
+    <h2 class="m-3 text-center">Username : {{request.user.username}}</h2>
+    <h2 class='m-3 text-center'>Email : {{request.user.email}}</h2>
+    </div>
+
+    <section class="confirmation_part section_padding">
+    <div class="row">
+        <div class="col-lg-12">
+            {% for order in orders %}
+            <div class="order_details_iner">
+            <h1>#{{order.id}}</h1>
+            <h3 class="mb-5 text-center">Order Details</h3>
+                <table class="table table-borderless">
+                <thead>
+                    <tr>
+                    <th scope="col" colspan="2">Product</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for o in order.order_row.all %}
+                    <tr>
+                    <th colspan="2"><span>{{o.product.title}}</span></th>
+                    <th>x{{o.amount}}</th>
+                    <th> <span>${{o.price}}</span></th>
+                    </tr>
+                {% endfor %}
+                    
+                </tbody>
+                <tfoot>
+                    <tr>
+                    <th scope="col" colspan="3">Total Price</th>
+                    <th scope="col">{{order.get_total_price}}</th>
+                    </tr>
+                    <tr>
+                        <th scope="col" colspan="3">Is paid</th>
+                        <th scope="col">{{order.is_paid|yesno:"yes,no"}}</th>
+                    </tr>
+                </tfoot>
+                </table>
+                <br><br>
+                {% if order.billing %}
+                <h3 class="mb-5 text-center">Billing</h3>
+                 <table class="table table-borderless">
+                <thead>
+                    <tr>
+                    <th scope="col" colspan="2">Address</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">Is Deliverd</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <th colspan="2"><span>{{order.billing.address}}</span></th>
+                <th>Iran</th>
+                <th> <span>{{order.billing.is_in_progress|yesno:"no,yes"}}</span></th>
+                </tr>
+                    
+                </tbody>
+                </table>
+
+                {% endif %}
+            </div>
+            {% endfor %}
+            
+        </div>
+      </div>
+      </section>
+{% endblock content %}

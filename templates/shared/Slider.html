@@ -1,0 +1,14 @@
+ {% for slider in sliders %}
+    <div class="col-xl-4 col-lg-6">
+        <div class="single-category mb-30">
+            <div class="category-img">
+                <img src="{{slider.image.url}}" height="450" alt="{{slider.title}}">
+                <div class="category-caption">
+                    <h2 style="color : wheat">{{slider.title}}</h2>
+                    <span class="best"><a href="/products/list?category={{slider.category.title}}">Best New Deals</a></span>
+                    <span class="collection">New Collection</span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
