@@ -25,7 +25,7 @@ SECRET_KEY = 'er_083y2mr!*_277lok9aajz^#f15&ezjku81+jhl+$(ma40dj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ali-eshop.herokuapp.com']
+ALLOWED_HOSTS = ['ali-eshop.herokuapp.com' , 'localhost']
 
 
 # Application definition
@@ -140,7 +140,7 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR , "media_cdn")
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 import dj_database_url
 prod_db = dj_database_url.config(conn_max_age=500)
