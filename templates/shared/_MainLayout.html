@@ -20,11 +20,11 @@
 
     <body onload="delete_message()">
     
-        {% render_partial 'header' %}
+        {% include 'shared/Header.html' %}
 
         {% block content %}{% endblock content %}
         
-        {% render_partial 'footer' %}
+        {% include 'shared/Footer.html' %}
             
         {% include 'shared/_FooterRefs.html' %}
 
