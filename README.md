@@ -1,11 +1,11 @@
 # eshop
 
 Electronic shop using **Django**.<br>
-You can register and login to the site and buy clothes.<br>
+You can register and login to the site.<br>
 You can filter products by tags or by their category. Also, you can search by query and find your suitable product.<br>
 Then, add your product to your cart and submit your order.<br>
 You should write down your information such as email and address to submit it.<br>
-Your order adds to our database as well as your profile, and you can trace it anytime.<br>
+Your order adds to the database as well as your profile.<br>
 You could visit this eshop via [this link.](http://ali-eshop.herokuapp.com)
 
 ### Login Page
